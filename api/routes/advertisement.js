@@ -13,7 +13,8 @@ router.post('/', adValidation, auth, (req, res, next) => {
         localization: req.body.localization,
         date: new Date(),
         coordinates: req.body.coordinates,
-        needHelp: req.body.needHelp
+        needHelp: req.body.needHelp,
+        userTelephone: req.body.userTelephone
     })
 
     adObject.save()
@@ -62,13 +63,14 @@ router.get('/:id', auth, (req, res, next) => {
         })
 })
 
-router.patch('/', auth, (req, res, next) => {
+router.patch('/',adValidation, auth, (req, res, next) => {
     Advertisement.findOneAndUpdate({_id: req.body.id}, {
         title: req.body.title,
         description: req.body.description,
         localization: req.body.localization,
         coordinates: req.body.coordinates,
-        needHelp: req.body.needHelp
+        needHelp: req.body.needHelp,
+        userTelephone: req.body.userTelephone
     }, (err, idea) => {
         if (err) return res.status(500).json({error: err})
 
