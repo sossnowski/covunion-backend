@@ -5,7 +5,7 @@ const adValidation = require('../resources/adValidation')
 const router = express.Router();
 
 
-router.post('/advertisement', adValidation, auth, (req, res, next) => {
+router.post('/', adValidation, auth, (req, res, next) => {
     const adObject = new Advertisement({
         title: req.body.title,
         description: req.body.description,
@@ -32,7 +32,7 @@ router.post('/advertisement', adValidation, auth, (req, res, next) => {
 
 })
 
-router.get('/advertisements', auth, (req, res, next) => {
+router.get('/all', auth, (req, res, next) => {
     Advertisement.find({})
         .exec()
         .then(ads => {
@@ -47,7 +47,22 @@ router.get('/advertisements', auth, (req, res, next) => {
         })
 })
 
-router.patch('/advertisement', auth, (req, res, next) => {
+router.get('/:id', auth, (req, res, next) => {
+    Advertisement.findOne({_id: req.params.id})
+        .exec()
+        .then(ad => {
+            res.status(200).json({
+                ideas: ad
+            });
+        })
+        .catch(error => {
+            res.status(500).json({
+                message: "An error has occurred"
+            })
+        })
+})
+
+router.patch('/', auth, (req, res, next) => {
     Advertisement.findOneAndUpdate({_id: req.body.id}, {
         title: req.body.title,
         description: req.body.description,
@@ -62,7 +77,7 @@ router.patch('/advertisement', auth, (req, res, next) => {
     })
 })
 
-router.delete('/advertisement', auth, (req, res, next) => {
+router.delete('/', auth, (req, res, next) => {
     Advertisement.findOneAndDelete({_id: req.body.id}, (err, idea) => {
         if (err) return res.status(500).json({error: err})
 
