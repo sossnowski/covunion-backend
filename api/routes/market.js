@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.post('/', taskValidation, auth, (req, res, next) => {
     const task = new Task({
+        advertisementId: req.body.advertisementId,
         owner: req.body.owner,
         executor: req.data.name,
         ownerTelephone: req.data.ownerTelephone,
