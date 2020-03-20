@@ -5,11 +5,6 @@ const adValidation = require('../resources/adValidation')
 const router = express.Router();
 
 
-
-
-
-
-
 router.post('/advertisement', adValidation, auth, (req, res, next) => {
     const adObject = new Advertisement({
         title: req.body.title,
