@@ -11,6 +11,7 @@ router.post('/', adValidation, auth, (req, res, next) => {
         description: req.body.description,
         user: req.data.name,
         localization: req.body.localization,
+        address: req.body.address,
         date: new Date(),
         coordinates: req.body.coordinates,
         needHelp: req.body.needHelp,
@@ -68,6 +69,7 @@ router.patch('/',adValidation, auth, (req, res, next) => {
         title: req.body.title,
         description: req.body.description,
         localization: req.body.localization,
+        address: req.body.address,
         coordinates: req.body.coordinates,
         needHelp: req.body.needHelp,
         userTelephone: req.body.userTelephone

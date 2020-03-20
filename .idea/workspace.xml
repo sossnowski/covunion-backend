@@ -4,7 +4,6 @@
     <list default="true" id="b5de4093-095d-496d-a9d0-c0d81374a2d1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/models/Advertisement.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/models/Advertisement.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/models/Task.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/models/Task.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/resources/adValidation.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/adValidation.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/routes/advertisement.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/advertisement.js" afterDir="false" />
     </list>
@@ -73,7 +72,7 @@
       <updated>1566987414577</updated>
       <workItem from="1566987415860" duration="6042000" />
       <workItem from="1584692946172" duration="20012000" />
-      <workItem from="1584722250824" duration="890000" />
+      <workItem from="1584722250824" duration="1780000" />
     </task>
     <servers />
   </component>
