@@ -82,13 +82,10 @@ router.patch('/vote', auth, (req, res, next) => {
                 user: req.data.name,
             });
 
-            console.log('aaa')
-
             Idea.updateOne(
                 {_id: req.body.ideaId },
                 {$inc: { votes: 1 }}
             ).exec()
-            console.log('aaa')
             vote.save()
             return res.status(200).json({message: "successfully voted"})
 
