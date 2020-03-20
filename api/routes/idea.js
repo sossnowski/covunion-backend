@@ -43,5 +43,17 @@ router.post('/addIdea', ideaValidation, auth, (req, res, next) => {
         });
 })
 
+router.patch('/editIdea', ideaValidation, auth, (req, res, next) => {
+    Idea.findOneAndUpdate({_id: req.body.id}, {
+        title: req.body.title,
+        description: req.body.description
+    }, (err, idea) => {
+        if (err) return res.status(500).json({error: err})
+
+        if (idea == null) res.status(404).json({message: "There is no such idea"})
+        res.status(200).json({message: 'Idea edited'})
+    })
+})
+
 
 module.exports = router;
