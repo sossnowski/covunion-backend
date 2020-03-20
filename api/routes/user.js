@@ -53,7 +53,7 @@ router.post('/signup', userValidation, (req, res, next) => {
 });
 
 router.post('/login', (req, res, next) => {
-    User.find({name: req.body.name})
+    User.find({email: req.body.email})
         .exec()
         .then(user => {
             if (user.length < 1) {
@@ -69,13 +69,12 @@ router.post('/login', (req, res, next) => {
                     }
                     if (result) {
                         const objectData = {
-                            name: user[0].name
+                            name: user[0].email
                         }
-                        var token = generateToken(objectData)
+                        let token = generateToken(objectData)
                         return res.status(200).json({
                             message: 'Auth succeed',
                             token: token,
-                            data: user[0].data
                         });
                     }
                     res.status(401).json({
