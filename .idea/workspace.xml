@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b5de4093-095d-496d-a9d0-c0d81374a2d1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/api/routes/idea.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/idea.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/services/idea/decrementVote.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/routes/vote.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/vote.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,7 +30,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/api/services/idea" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -40,6 +43,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/api/services/idea" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
@@ -66,7 +70,7 @@
       <option name="presentableId" value="Default" />
       <updated>1566987414577</updated>
       <workItem from="1566987415860" duration="6042000" />
-      <workItem from="1584692946172" duration="6145000" />
+      <workItem from="1584692946172" duration="12598000" />
     </task>
     <servers />
   </component>

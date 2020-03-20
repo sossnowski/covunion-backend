@@ -15,6 +15,7 @@ mongoose.connect(process.env.MONGODB_URL, {
 const infoRoutes = require('./api/routes/info');
 const userRoutes = require('./api/routes/user');
 const ideaRoutes = require('./api/routes/idea');
+const voteRoutes = require('./api/routes/vote');
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
@@ -37,6 +38,7 @@ app.use((req, res, next) => {
 app.use('/info', infoRoutes);
 app.use('/user', userRoutes);
 app.use('/idea', ideaRoutes);
+app.use('/vote', voteRoutes);
 
 app.use((req, res, next) => {
     const error = new Error('Not found');
