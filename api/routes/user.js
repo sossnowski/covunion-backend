@@ -4,14 +4,15 @@ const bcrypt = require('bcrypt');
 const crypto = require('crypto')
 var nodemailer = require("nodemailer")
 const generateToken = require('../services/generateToken')
+const userValidation = require('../resources/userValidation')
 require('dotenv').config();
 const router = express.Router();
 const saltRounds = 10;
 
 const User = require('../models/User');
 
-router.post('/signup', (req, res, next) => {
-    User.find({name: req.body.name})
+router.post('/signup', userValidation, (req, res, next) => {
+    User.find({name: req.body.username})
         .exec()
         .then(user => {
             if (user.length >= 1) {
@@ -27,9 +28,9 @@ router.post('/signup', (req, res, next) => {
                     } else {
                         const user = new User({
                             id: new mongoose.Types.ObjectId,
-                            name: req.body.name,
+                            name: req.body.username,
                             password: hash,
-                            data: ''
+                            email: req.body.email
                         });
 
                         user.save()
