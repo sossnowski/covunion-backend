@@ -56,6 +56,8 @@ router.patch('/editIdea', ideaValidation, auth, (req, res, next) => {
     })
 })
 
+
+
 router.delete('/deleteIdea', auth, (req, res, next) => {
     Idea.findOneAndDelete({_id: req.body.id}, (err, idea) => {
         if (err) return res.status(500).json({error: err})

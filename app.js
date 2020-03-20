@@ -16,6 +16,7 @@ const infoRoutes = require('./api/routes/info');
 const userRoutes = require('./api/routes/user');
 const ideaRoutes = require('./api/routes/idea');
 const voteRoutes = require('./api/routes/vote');
+const marketRoutes = require('./api/routes/market');
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
@@ -39,6 +40,7 @@ app.use('/info', infoRoutes);
 app.use('/user', userRoutes);
 app.use('/idea', ideaRoutes);
 app.use('/vote', voteRoutes);
+app.use('/market', marketRoutes);
 
 app.use((req, res, next) => {
     const error = new Error('Not found');
