@@ -1,31 +1,23 @@
 const express = require('express');
 const auth = require('../services/auth')
-const Advertisement = require('../models/Advertisement')
-const adValidation = require('../resources/adValidation')
+const Task = require('../models/Task')
+const taskValidation = require('../resources/taskValidation')
 const router = express.Router();
 
 
-
-
-
-
-
-router.post('/advertisement', adValidation, auth, (req, res, next) => {
-    const adObject = new Advertisement({
-        title: req.body.title,
-        description: req.body.description,
-        user: req.data.name,
-        localization: req.body.localization,
-        date: new Date(),
-        coordinates: req.body.coordinates,
-        needHelp: req.body.needHelp
+router.post('/', taskValidation, auth, (req, res, next) => {
+    const task = new Task({
+        owner: req.body.owner,
+        executor: req.data.name,
+        ownerTelephone: req.data.ownerTelephone,
+        executorTelephone: req.data.executorTelephone
     })
 
-    adObject.save()
+    task.save()
         .then(result => {
             console.log(result);
             res.status(201).json({
-                message: 'Advertisement created'
+                message: 'Task created'
             });
         })
         .catch(err => {
@@ -34,47 +26,62 @@ router.post('/advertisement', adValidation, auth, (req, res, next) => {
                 error: err
             });
         });
-
 })
 
-router.get('/advertisements', auth, (req, res, next) => {
-    Advertisement.find({})
+router.get('/taskAsOwner', auth, (req, res, next) => {
+    Task.find({owner: req.data.name})
         .exec()
-        .then(ads => {
+        .then(tasks => {
             res.status(200).json({
-                ideas: ads
+                ideas: tasks
             });
         })
         .catch(error => {
+            console.log(error)
             res.status(500).json({
-                message: "An error has occurred"
+                message: "An error has occured"
             })
         })
 })
 
-router.patch('/advertisement', auth, (req, res, next) => {
-    Advertisement.findOneAndUpdate({_id: req.body.id}, {
-        title: req.body.title,
-        description: req.body.description,
-        localization: req.body.localization,
-        coordinates: req.body.coordinates,
-        needHelp: req.body.needHelp
+router.get('/taskAsExecutor', auth, (req, res, next) => {
+    Task.find({executor: req.data.name})
+        .exec()
+        .then(tasks => {
+            res.status(200).json({
+                ideas: tasks
+            });
+        })
+        .catch(error => {
+            console.log(error)
+            res.status(500).json({
+                message: "An error has occured"
+            })
+        })
+})
+
+router.patch('/ownerDone/:taskId', auth, (req, res, next) => {
+    Task.findOneAndUpdate({_id: req.params.taskId}, {
+        ownerDecision: true,
     }, (err, idea) => {
         if (err) return res.status(500).json({error: err})
 
-        if (idea == null) return res.status(404).json({message: "There is no such advertisement"})
-        res.status(200).json({message: 'Advertisement edited'})
+        if (idea == null) res.status(404).json({message: "There is no such task"})
+        res.status(200).json({message: 'Task edited'})
     })
 })
 
-router.delete('/advertisement', auth, (req, res, next) => {
-    Advertisement.findOneAndDelete({_id: req.body.id}, (err, idea) => {
+router.patch('/executorDone/:taskId', auth, (req, res, next) => {
+    Task.findOneAndUpdate({_id: req.params.taskId}, {
+        executorDecision: true,
+    }, (err, idea) => {
         if (err) return res.status(500).json({error: err})
 
-        if (idea == null) res.status(404).json({message: "There is no such advertisement"})
-        res.status(200).json({message: 'Advertisement deleted'})
+        if (idea == null) res.status(404).json({message: "There is no such task"})
+        res.status(200).json({message: 'Task edited'})
     })
 })
 
 
 module.exports = router;
+
