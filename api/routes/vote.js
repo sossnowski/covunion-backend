@@ -3,13 +3,14 @@ const auth = require('../services/auth')
 const Vote = require('../models/Vote')
 const router = express.Router();
 const incrementVote = require('../services/idea/incrementVote')
+const decrementVote = require('../services/idea/decrementVote')
 
 
 
 
 
 
-router.patch('/vote', auth, (req, res, next) => {
+router.post('/', auth, (req, res, next) => {
     Vote.find({user: req.data.name})
         .exec()
         .then( votes => {
@@ -34,6 +35,15 @@ router.patch('/vote', auth, (req, res, next) => {
         })
         .catch(error => {
             return res.status(500).json({message: error})
+        })
+})
+
+router.delete('/', auth, (req, res, next) => {
+    Vote.findOneAndDelete({ideaId: req.body.ideaId, user: req.data.name})
+        .exec()
+        .then( async (result) => {
+            await decrementVote(req.body.ideaId)
+            return res.status(200).json({message: 'successfully deleted'})
         })
 })
 
