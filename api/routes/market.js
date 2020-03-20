@@ -1,13 +1,16 @@
 const express = require('express');
 const auth = require('../services/auth')
 const Task = require('../models/Task')
+const taskValidation = require('../resources/taskValidation')
 const router = express.Router();
 
 
-router.post('/', auth, (req, res, next) => {
+router.post('/', taskValidation, auth, (req, res, next) => {
     const task = new Task({
         owner: req.body.owner,
         executor: req.data.name,
+        ownerTelephone: req.data.ownerTelephone,
+        executorTelephone: req.data.executorTelephone
     })
 
     task.save()
