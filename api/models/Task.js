@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const taskSchema = mongoose.Schema({
     id: mongoose.Types.ObjectId,
-    advertisementId: {type: String, required: true},
+    advertisement: { type: mongoose.Schema.Types.ObjectId, ref: 'Advertisement', required: true },
     owner: {type: String, required: true},
     executor: {type: String, required: true},
     ownerDecision: {type: Boolean, default: false},
