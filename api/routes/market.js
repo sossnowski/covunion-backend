@@ -31,6 +31,7 @@ router.post('/', taskValidation, auth, (req, res, next) => {
 
 router.get('/taskAsOwner', auth, (req, res, next) => {
     Task.find({owner: req.data.name})
+        .populate('advertisement')
         .exec()
         .then(tasks => {
             res.status(200).json({
@@ -47,6 +48,7 @@ router.get('/taskAsOwner', auth, (req, res, next) => {
 
 router.get('/taskAsExecutor', auth, (req, res, next) => {
     Task.find({executor: req.data.name})
+        .populate('advertisement')
         .exec()
         .then(tasks => {
             res.status(200).json({
@@ -89,7 +91,24 @@ router.delete('/:id', auth, (req, res, next) => {
 
         if (idea == null) res.status(404).json({message: "There is no such task"})
         res.status(200).json({message: 'Task deleted'})
-    }))
+    })
+})
+
+router.get('/allMyTasks', auth, (req, res, next) => {
+    Task.find({ $or:[ {executor: req.data.name}, {owner: req.data.name}]})
+        .populate('advertisement')
+        .exec()
+        .then(tasks => {
+            res.status(200).json({
+                tasks: tasks
+            });
+        })
+        .catch(error => {
+            console.log(error)
+            res.status(500).json({
+                message: "An error has occured"
+            })
+        })
 })
 
 
