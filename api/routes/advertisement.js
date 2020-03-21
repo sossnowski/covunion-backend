@@ -35,7 +35,7 @@ router.post('/', adValidation, auth, (req, res, next) => {
 })
 
 router.get('/all', (req, res, next) => {
-    Advertisement.find({})
+    Advertisement.find({active: true})
         .exec()
         .then(ads => {
             res.status(200).json({
@@ -64,6 +64,23 @@ router.get('/:id', auth, (req, res, next) => {
         })
 })
 
+router.get('/my/:id', auth, (req, res, next) => {
+    console.log('aaaa')
+    Advertisement.find({user: req.data.name})
+        .exec()
+        .then(ad => {
+            console.log(ad)
+            res.status(200).json({
+                ads: ad
+            });
+        })
+        .catch(error => {
+            res.status(500).json({
+                message: error
+            })
+        })
+})
+
 router.patch('/',adValidation, auth, (req, res, next) => {
     Advertisement.findOneAndUpdate({_id: req.body.id}, {
         title: req.body.title,
@@ -87,6 +104,28 @@ router.delete('/', auth, (req, res, next) => {
 
         if (idea == null) res.status(404).json({message: "There is no such advertisement"})
         res.status(200).json({message: 'Advertisement deleted'})
+    })
+})
+
+router.patch('/checkInActive/:id', auth, (req, res, next) => {
+    Advertisement.findOneAndUpdate({_id: req.params.id}, {
+        active: false
+    }, (err, idea) => {
+        if (err) return res.status(500).json({error: err})
+
+        if (idea == null) return res.status(404).json({message: "There is no such advertisement"})
+        res.status(200).json({message: 'Advertisement edited'})
+    })
+})
+
+router.patch('/checkActive/:id', auth, (req, res, next) => {
+    Advertisement.findOneAndUpdate({_id: req.params.id}, {
+        active: true
+    }, (err, idea) => {
+        if (err) return res.status(500).json({error: err})
+
+        if (idea == null) return res.status(404).json({message: "There is no such advertisement"})
+        res.status(200).json({message: 'Advertisement edited'})
     })
 })
 

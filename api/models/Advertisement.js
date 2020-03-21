@@ -10,7 +10,8 @@ const adSchema = mongoose.Schema({
     address: {type: String, required: true},
     coordinates: {type: String, required: true},
     date: {type: Date, required: true},
-    needHelp: {type: Boolean, required: true}
+    needHelp: {type: Boolean, required: true},
+    active: {type: Boolean, default: true}
 });
 
 module.exports = mongoose.model('Advertisement', adSchema);
