@@ -7,10 +7,11 @@ const router = express.Router();
 
 router.post('/', taskValidation, auth, (req, res, next) => {
     const task = new Task({
+        advertisement: req.body.advertisementId,
         owner: req.body.owner,
         executor: req.data.name,
-        ownerTelephone: req.data.ownerTelephone,
-        executorTelephone: req.data.executorTelephone
+        ownerTelephone: req.body.ownerTelephone,
+        executorTelephone: req.body.executorTelephone
     })
 
     task.save()
@@ -30,10 +31,11 @@ router.post('/', taskValidation, auth, (req, res, next) => {
 
 router.get('/taskAsOwner', auth, (req, res, next) => {
     Task.find({owner: req.data.name})
+        .populate('advertisement')
         .exec()
         .then(tasks => {
             res.status(200).json({
-                ideas: tasks
+                tasks: tasks
             });
         })
         .catch(error => {
@@ -46,10 +48,11 @@ router.get('/taskAsOwner', auth, (req, res, next) => {
 
 router.get('/taskAsExecutor', auth, (req, res, next) => {
     Task.find({executor: req.data.name})
+        .populate('advertisement')
         .exec()
         .then(tasks => {
             res.status(200).json({
-                ideas: tasks
+                tasks: tasks
             });
         })
         .catch(error => {
@@ -80,6 +83,32 @@ router.patch('/executorDone/:taskId', auth, (req, res, next) => {
         if (idea == null) res.status(404).json({message: "There is no such task"})
         res.status(200).json({message: 'Task edited'})
     })
+})
+
+router.delete('/:id', auth, (req, res, next) => {
+    Task.findOneAndDelete({_id: req.params.id}, (err, idea) => {
+        if (err) return res.status(500).json({error: err})
+
+        if (idea == null) res.status(404).json({message: "There is no such task"})
+        res.status(200).json({message: 'Task deleted'})
+    })
+})
+
+router.get('/allMyTasks', auth, (req, res, next) => {
+    Task.find({ $or:[ {executor: req.data.name}, {owner: req.data.name}]})
+        .populate('advertisement')
+        .exec()
+        .then(tasks => {
+            res.status(200).json({
+                tasks: tasks
+            });
+        })
+        .catch(error => {
+            console.log(error)
+            res.status(500).json({
+                message: "An error has occured"
+            })
+        })
 })
 
 

@@ -11,6 +11,7 @@ router.post('/', adValidation, auth, (req, res, next) => {
         description: req.body.description,
         user: req.data.name,
         localization: req.body.localization,
+        address: req.body.address,
         date: new Date(),
         coordinates: req.body.coordinates,
         needHelp: req.body.needHelp,
@@ -33,12 +34,12 @@ router.post('/', adValidation, auth, (req, res, next) => {
 
 })
 
-router.get('/all', auth, (req, res, next) => {
+router.get('/all', (req, res, next) => {
     Advertisement.find({})
         .exec()
         .then(ads => {
             res.status(200).json({
-                ideas: ads
+                ads: ads
             });
         })
         .catch(error => {
@@ -68,6 +69,7 @@ router.patch('/',adValidation, auth, (req, res, next) => {
         title: req.body.title,
         description: req.body.description,
         localization: req.body.localization,
+        address: req.body.address,
         coordinates: req.body.coordinates,
         needHelp: req.body.needHelp,
         userTelephone: req.body.userTelephone
