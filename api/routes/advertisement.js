@@ -34,12 +34,12 @@ router.post('/', adValidation, auth, (req, res, next) => {
 
 })
 
-router.get('/all', auth, (req, res, next) => {
+router.get('/all', (req, res, next) => {
     Advertisement.find({})
         .exec()
         .then(ads => {
             res.status(200).json({
-                ideas: ads
+                ads: ads
             });
         })
         .catch(error => {

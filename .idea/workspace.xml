@@ -3,7 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="b5de4093-095d-496d-a9d0-c0d81374a2d1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/routes/market.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/market.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/routes/advertisement.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/advertisement.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/services/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/services/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +30,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/api/resources" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -70,7 +72,8 @@
       <updated>1566987414577</updated>
       <workItem from="1566987415860" duration="6042000" />
       <workItem from="1584692946172" duration="20012000" />
-      <workItem from="1584722250824" duration="5668000" />
+      <workItem from="1584722250824" duration="8966000" />
+      <workItem from="1584792868061" duration="2313000" />
     </task>
     <servers />
   </component>
