@@ -8,6 +8,7 @@ const router = express.Router();
 
 router.get('/allIdeas', (req, res, next) => {
     Idea.find({})
+        .sort({votes: -1})
         .exec()
         .then(ideas => {
             res.status(200).json({
