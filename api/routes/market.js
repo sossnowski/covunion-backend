@@ -34,7 +34,7 @@ router.get('/taskAsOwner', auth, (req, res, next) => {
         .exec()
         .then(tasks => {
             res.status(200).json({
-                ideas: tasks
+                tasks: tasks
             });
         })
         .catch(error => {
@@ -50,7 +50,7 @@ router.get('/taskAsExecutor', auth, (req, res, next) => {
         .exec()
         .then(tasks => {
             res.status(200).json({
-                ideas: tasks
+                tasks: tasks
             });
         })
         .catch(error => {
@@ -81,6 +81,15 @@ router.patch('/executorDone/:taskId', auth, (req, res, next) => {
         if (idea == null) res.status(404).json({message: "There is no such task"})
         res.status(200).json({message: 'Task edited'})
     })
+})
+
+router.delete('/:id', auth, (req, res, next) => {
+    Task.findOneAndDelete({_id: req.params.id}, (err, idea) => {
+        if (err) return res.status(500).json({error: err})
+
+        if (idea == null) res.status(404).json({message: "There is no such task"})
+        res.status(200).json({message: 'Task deleted'})
+    }))
 })
 
 
