@@ -54,7 +54,7 @@ router.get('/:id', auth, (req, res, next) => {
         .exec()
         .then(ad => {
             res.status(200).json({
-                ideas: ad
+                ad: ad
             });
         })
         .catch(error => {
@@ -64,12 +64,10 @@ router.get('/:id', auth, (req, res, next) => {
         })
 })
 
-router.get('/my/:id', auth, (req, res, next) => {
-    console.log('aaaa')
+router.get('/my/:id*?', auth, (req, res, next) => {
     Advertisement.find({user: req.data.name})
         .exec()
         .then(ad => {
-            console.log(ad)
             res.status(200).json({
                 ads: ad
             });
